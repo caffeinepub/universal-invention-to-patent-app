@@ -1,0 +1,240 @@
+{
+  "kind": "build_request",
+  "title": "Universal Invention-to-Patent App with AI Voice Integration",
+  "projectName": "PatentForge AI",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a visually distinctive app theme with a professional, futuristic aesthetic — deep navy/slate backgrounds, gold or amber accent colors, clean sans-serif typography, and a structured dashboard layout suited to an inventor/patent workflow. Apply this theme consistently across all pages and components.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All pages share a consistent color palette of deep navy/slate with gold or amber accents",
+        "Typography is clean, legible, and professional throughout",
+        "Dashboard layout is structured with clear navigation between major sections"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Build a main dashboard page that shows an overview of the user's invention portfolio — a list of invention projects with title, status (Draft, In Review, Ready to Submit), and creation date. Allow creating new invention projects and opening existing ones.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Dashboard displays all saved invention projects as cards or list items",
+        "Each item shows title, status badge, and creation date",
+        "A 'New Invention' button opens a project creation flow",
+        "Clicking an existing project navigates to its detail page"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement an Invention Idea Workspace page where users can write and edit the full description of their invention idea. Include fields for: Invention Title, Problem Being Solved, Proposed Solution, Key Features, and Claims. Auto-save content to the backend as the user types.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All specified fields are present and editable",
+        "Content is persisted to the backend actor",
+        "Auto-save triggers after user stops typing for 2 seconds",
+        "A save confirmation indicator is shown"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add hands-free voice input functionality using the browser's Web Speech API so users can dictate text into any text field in the app without touching the keyboard. Show a microphone button next to each major text input. Indicate when voice recognition is active with a visual indicator.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A microphone icon button appears next to major text input fields",
+        "Clicking the mic button activates voice recognition via Web Speech API",
+        "Dictated text is inserted into the active field in real time",
+        "An animated indicator (e.g., pulsing ring) shows when voice input is active",
+        "Clicking the mic button again stops voice recognition"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement a Scientific Terminology Assistant panel within the Invention Workspace. Provide a searchable glossary of common scientific and engineering terms. When a user types or selects a term in their description, offer a tooltip or side panel with the scientific definition and recommended phrasing for patent use.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A terminology search panel is accessible from the Invention Workspace",
+        "Users can search for terms and see definitions",
+        "Definitions include recommended phrasing suitable for patent language",
+        "At least 30 common scientific and engineering terms are included in the initial glossary"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement a Legal Terminology Formatter section. Provide a list of standard patent legal phrases and claim structures (e.g., 'wherein', 'comprising', 'at least one', independent and dependent claims). Allow users to insert these phrases into their patent submission text with a single click, and show a formatted preview of the patent claim section.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A legal phrases panel is available in the Invention Workspace",
+        "Users can click a phrase to insert it into the claims text area",
+        "A formatted preview section shows the current claim text with proper legal structure",
+        "At least 20 standard patent legal phrases are included"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Implement an AI Collaboration panel that provides automated analysis and suggestions for an invention idea. When a user submits their invention description, generate: a novelty checklist (key questions to verify the idea is novel), a list of suggested improvements or refinements, and a readiness score (0–100%) indicating how complete the patent submission appears. Store these AI analysis results in the backend per invention project.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "An 'Analyze Idea' button triggers the AI analysis workflow",
+        "A novelty checklist with at least 5 questions is displayed",
+        "Suggested improvements are shown as a bulleted list",
+        "A readiness score percentage is calculated and displayed",
+        "Analysis results are saved to the backend and reloaded when the project is reopened"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Implement a Learning Resources section accessible from the main navigation. Display categorized patent guidance articles and resource links covering: the patent application process, types of patents (utility, design, plant), how to conduct a prior art search, and how to work with a patent attorney. Organize resources into category cards that expand to show individual articles.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A Resources page is accessible from the main navigation",
+        "Resources are grouped into at least 4 categories",
+        "Each category expands to show individual resource entries",
+        "Each resource entry includes a title and a descriptive summary"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Implement file import and export functionality for invention projects. Export: allow users to export a full invention project as a plain-text (.txt) or formatted document that includes all fields (title, problem, solution, features, claims, AI analysis). Import: allow users to import a previously exported text file to pre-populate a new invention project's fields.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "An 'Export' button on each invention project generates and downloads a .txt file with all project fields",
+        "The exported file is clearly structured with labeled sections",
+        "An 'Import File' button on the New Invention flow allows uploading a previously exported file",
+        "Imported data correctly pre-populates the relevant form fields"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Implement a Patent Lawyer Export package feature. From any invention project, allow the user to generate a 'Lawyer Package' — a formatted text export that includes the invention title, description, claims section, legal terminology formatted text, AI analysis summary, and a cover note section the user can fill in. This package should be downloadable as a .txt file.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A 'Generate Lawyer Package' button is available on each invention project",
+        "The package includes all required sections: title, description, claims, AI analysis, cover note",
+        "User can write a custom cover note before generating",
+        "The package downloads as a clearly formatted .txt file"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Implement a Portfolio view page that displays all of the user's invention projects organized by status (Draft, In Review, Ready to Submit, Submitted). Show summary statistics at the top: total inventions, count per status, and most recently updated project.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A Portfolio page is accessible from the main navigation",
+        "Inventions are grouped by their status",
+        "Summary statistics (total count, per-status counts, most recently updated) appear at the top",
+        "Clicking any invention card navigates to that project's workspace"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Implement backend data storage in the Motoko actor to persist invention projects. Each project record must store: id, title, ownerId (text), problem, solution, features, claims, status, aiAnalysis (noveltyChecklist, suggestions, readinessScore), createdAt, and updatedAt. Provide CRUD operations: createProject, updateProject, getProject, getAllProjects, deleteProject.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The actor stores invention project records in a stable HashMap or TrieMap",
+        "All specified fields are present in the project record type",
+        "createProject, updateProject, getProject, getAllProjects, and deleteProject functions are implemented",
+        "getAllProjects returns all projects",
+        "Timestamps (createdAt, updatedAt) are stored as Int (nanoseconds)"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Add a logo image for PatentForge AI: a stylized lightbulb integrated with a gear and a document/scroll, rendered in gold on a deep navy background, suitable for use as the app header logo.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-10"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The generated logo image is placed in frontend/public/assets/generated/",
+        "The logo appears in the app header/navigation bar",
+        "The image renders clearly at both small (header) and medium sizes"
+      ]
+    }
+  ],
+  "constraints": [
+    "All Motoko logic must remain in a single backend actor file (backend/main.mo)",
+    "Do not edit any files listed in frontend.immutablePaths",
+    "Voice input must use the browser's built-in Web Speech API only — no third-party voice service integrations",
+    "No real-time WebSocket features — all data operations are request/response",
+    "No external AI service integrations (OpenAI, etc.) — AI analysis must be deterministic rule-based logic implemented in the frontend or backend"
+  ],
+  "nonGoals": [
+    "Real-time collaboration with multiple users simultaneously",
+    "Integration with external patent databases (USPTO, EPO) for live prior art search",
+    "Email or SMS delivery of patent packages",
+    "Authentication via Internet Identity — app is single-user for now",
+    "PDF export — plain text export only for this version",
+    "Payment processing for patent filing fees",
+    "Direct API integration with patent attorney firms"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Stylized lightbulb fused with a mechanical gear and a scroll/document, rendered in gold metallic tones on a deep navy background, clean and iconic (patentforge-logo.dim_256x256.png)",
+      "Abstract hero banner with glowing blueprint-style circuit lines and invention sketches on a deep navy background with gold accent highlights (patentforge-hero-banner.dim_1200x400.png)"
+    ],
+    "edits": []
+  }
+}

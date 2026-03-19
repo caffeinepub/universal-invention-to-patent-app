@@ -1,0 +1,12 @@
+{
+  "frontend/src/components/layout/AppLayout.tsx": "App shell with sticky header, navigation links, mobile menu, and footer. Fixed the conflicting `hidden flex` Tailwind classes on the logo fallback div by using inline `style` for display toggling instead.",
+  "frontend/src/components/workspace/AICollaborationPanel.tsx": "AI analysis panel showing readiness score, novelty checklist, and improvement suggestions. Replaced deprecated `flex-shrink-0` with `shrink-0` throughout.",
+  "frontend/src/components/workspace/ScientificTerminologyPanel.tsx": "Searchable scientific terminology glossary panel with expandable term cards. Replaced deprecated `flex-shrink-0` with `shrink-0` and removed unused `Badge` import.",
+  "frontend/src/pages/Dashboard.tsx": "Main dashboard page with hero banner, project stats, and invention project grid. Replaced deprecated `flex-shrink-0` with `shrink-0` and removed unused `FileText` and `Badge` imports.",
+  "frontend/src/hooks/useVoiceInput.ts": "Custom hook wrapping the Web Speech API for voice-to-text input. Replaced all references to the missing global `SpeechRecognition`, `SpeechRecognitionEvent`, and `SpeechRecognitionErrorEvent` types with locally defined interfaces to fix TypeScript errors.",
+  "frontend/src/components/VoiceInputButton.tsx": "Reusable microphone button component that uses `useVoiceInput` to provide voice dictation into any text field. Moved from the read-only `ui/` directory to `src/components/` so it can be created as a new file.",
+  "frontend/src/pages/NewProject.tsx": "Form page for creating a new invention project with import-from-file support and voice input. Updated the `VoiceInputButton` import to use the new `@/components/VoiceInputButton` path.",
+  "frontend/src/pages/InventionWorkspace.tsx": "Full invention editing workspace with auto-save, voice input on all fields, claims preview, and tabbed side panels for AI analysis, legal phrases, and scientific terminology. Also includes export and lawyer package generation.",
+  "frontend/src/pages/Portfolio.tsx": "Portfolio overview page showing all invention projects grouped by status with summary statistics and a most-recently-updated highlight card.",
+  "frontend/src/pages/Resources.tsx": "Learning resources page with accordion-style category groups covering the patent application process, patent types, prior art search, and working with patent attorneys."
+}

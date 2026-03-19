@@ -1,0 +1,246 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-visually-distinctive-app-theme-with-a-professional-futuristic-aesthetic-deep-navy-slate-backgrounds-gold-or-amber-accent-colors-clean-sans-serif-typography-and-a-structured-dashboard-layout-suited-to-an-inventor-patent-workflow-apply-this-theme-consistently-across-all-pages-and-components",
+      "featureTitle": "Create a visually distinctive app theme with a professional, futuristic aesthetic — deep navy/slate backgrounds, gold or amber accent colors, clean sans-serif typography, and a structured dashboard layout suited to an inventor/patent workflow. Apply this theme consistently across all pages and components.",
+      "files": [
+        "frontend/src/components/layout/AppLayout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-main-dashboard-page-that-shows-an-overview-of-the-user-s-invention-portfolio-a-list-of-invention-projects-with-title-status-draft-in-review-ready-to-submit-and-creation-date-allow-creating-new-invention-projects-and-opening-existing-ones",
+      "featureTitle": "Build a main dashboard page that shows an overview of the user's invention portfolio — a list of invention projects with title, status (Draft, In Review, Ready to Submit), and creation date. Allow creating new invention projects and opening existing ones.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/Dashboard.tsx",
+        "frontend/src/pages/NewProject.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-an-invention-idea-workspace-page-where-users-can-write-and-edit-the-full-description-of-their-invention-idea-include-fields-for-invention-title-problem-being-solved-proposed-solution-key-features-and-claims-auto-save-content-to-the-backend-as-the-user-types",
+      "featureTitle": "Implement an Invention Idea Workspace page where users can write and edit the full description of their invention idea. Include fields for: Invention Title, Problem Being Solved, Proposed Solution, Key Features, and Claims. Auto-save content to the backend as the user types.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/useAutoSave.ts",
+        "frontend/src/pages/InventionWorkspace.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-hands-free-voice-input-functionality-using-the-browser-s-web-speech-api-so-users-can-dictate-text-into-any-text-field-in-the-app-without-touching-the-keyboard-show-a-microphone-button-next-to-each-major-text-input-indicate-when-voice-recognition-is-active-with-a-visual-indicator",
+      "featureTitle": "Add hands-free voice input functionality using the browser's Web Speech API so users can dictate text into any text field in the app without touching the keyboard. Show a microphone button next to each major text input. Indicate when voice recognition is active with a visual indicator.",
+      "files": [
+        "frontend/src/hooks/useVoiceInput.ts",
+        "frontend/src/pages/InventionWorkspace.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-scientific-terminology-assistant-panel-within-the-invention-workspace-provide-a-searchable-glossary-of-common-scientific-and-engineering-terms-when-a-user-types-or-selects-a-term-in-their-description-offer-a-tooltip-or-side-panel-with-the-scientific-definition-and-recommended-phrasing-for-patent-use",
+      "featureTitle": "Implement a Scientific Terminology Assistant panel within the Invention Workspace. Provide a searchable glossary of common scientific and engineering terms. When a user types or selects a term in their description, offer a tooltip or side panel with the scientific definition and recommended phrasing for patent use.",
+      "files": [
+        "frontend/src/components/workspace/ScientificTerminologyPanel.tsx",
+        "frontend/src/data/scientificTerminology.ts",
+        "frontend/src/pages/InventionWorkspace.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-legal-terminology-formatter-section-provide-a-list-of-standard-patent-legal-phrases-and-claim-structures-e-g-wherein-comprising-at-least-one-independent-and-dependent-claims-allow-users-to-insert-these-phrases-into-their-patent-submission-text-with-a-single-click-and-show-a-formatted-preview-of-the-patent-claim-section",
+      "featureTitle": "Implement a Legal Terminology Formatter section. Provide a list of standard patent legal phrases and claim structures (e.g., 'wherein', 'comprising', 'at least one', independent and dependent claims). Allow users to insert these phrases into their patent submission text with a single click, and show a formatted preview of the patent claim section.",
+      "files": [
+        "frontend/src/components/workspace/ClaimsPreview.tsx",
+        "frontend/src/components/workspace/LegalPhrasesPanel.tsx",
+        "frontend/src/data/legalPhrases.ts",
+        "frontend/src/pages/InventionWorkspace.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-an-ai-collaboration-panel-that-provides-automated-analysis-and-suggestions-for-an-invention-idea-when-a-user-submits-their-invention-description-generate-a-novelty-checklist-key-questions-to-verify-the-idea-is-novel-a-list-of-suggested-improvements-or-refinements-and-a-readiness-score-0-100-indicating-how-complete-the-patent-submission-appears-store-these-ai-analysis-results-in-the-backend-per-invention-project",
+      "featureTitle": "Implement an AI Collaboration panel that provides automated analysis and suggestions for an invention idea. When a user submits their invention description, generate: a novelty checklist (key questions to verify the idea is novel), a list of suggested improvements or refinements, and a readiness score (0–100%) indicating how complete the patent submission appears. Store these AI analysis results in the backend per invention project.",
+      "files": [
+        "frontend/src/components/workspace/AICollaborationPanel.tsx",
+        "frontend/src/pages/InventionWorkspace.tsx",
+        "frontend/src/utils/aiAnalysis.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-learning-resources-section-accessible-from-the-main-navigation-display-categorized-patent-guidance-articles-and-resource-links-covering-the-patent-application-process-types-of-patents-utility-design-plant-how-to-conduct-a-prior-art-search-and-how-to-work-with-a-patent-attorney-organize-resources-into-category-cards-that-expand-to-show-individual-articles",
+      "featureTitle": "Implement a Learning Resources section accessible from the main navigation. Display categorized patent guidance articles and resource links covering: the patent application process, types of patents (utility, design, plant), how to conduct a prior art search, and how to work with a patent attorney. Organize resources into category cards that expand to show individual articles.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/AppLayout.tsx",
+        "frontend/src/data/learningResources.ts",
+        "frontend/src/pages/Resources.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-file-import-and-export-functionality-for-invention-projects-export-allow-users-to-export-a-full-invention-project-as-a-plain-text-txt-or-formatted-document-that-includes-all-fields-title-problem-solution-features-claims-ai-analysis-import-allow-users-to-import-a-previously-exported-text-file-to-pre-populate-a-new-invention-project-s-fields",
+      "featureTitle": "Implement file import and export functionality for invention projects. Export: allow users to export a full invention project as a plain-text (.txt) or formatted document that includes all fields (title, problem, solution, features, claims, AI analysis). Import: allow users to import a previously exported text file to pre-populate a new invention project's fields.",
+      "files": [
+        "frontend/src/pages/InventionWorkspace.tsx",
+        "frontend/src/pages/NewProject.tsx",
+        "frontend/src/utils/projectExport.ts",
+        "frontend/src/utils/projectImport.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-patent-lawyer-export-package-feature-from-any-invention-project-allow-the-user-to-generate-a-lawyer-package-a-formatted-text-export-that-includes-the-invention-title-description-claims-section-legal-terminology-formatted-text-ai-analysis-summary-and-a-cover-note-section-the-user-can-fill-in-this-package-should-be-downloadable-as-a-txt-file",
+      "featureTitle": "Implement a Patent Lawyer Export package feature. From any invention project, allow the user to generate a 'Lawyer Package' — a formatted text export that includes the invention title, description, claims section, legal terminology formatted text, AI analysis summary, and a cover note section the user can fill in. This package should be downloadable as a .txt file.",
+      "files": [
+        "frontend/src/components/workspace/LawyerPackageDialog.tsx",
+        "frontend/src/pages/InventionWorkspace.tsx",
+        "frontend/src/utils/lawyerPackageExport.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-portfolio-view-page-that-displays-all-of-the-user-s-invention-projects-organized-by-status-draft-in-review-ready-to-submit-submitted-show-summary-statistics-at-the-top-total-inventions-count-per-status-and-most-recently-updated-project",
+      "featureTitle": "Implement a Portfolio view page that displays all of the user's invention projects organized by status (Draft, In Review, Ready to Submit, Submitted). Show summary statistics at the top: total inventions, count per status, and most recently updated project.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/AppLayout.tsx",
+        "frontend/src/pages/Portfolio.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-logo-image-for-patentforge-ai-a-stylized-lightbulb-integrated-with-a-gear-and-a-document-scroll-rendered-in-gold-on-a-deep-navy-background-suitable-for-use-as-the-app-header-logo",
+      "featureTitle": "Add a logo image for PatentForge AI: a stylized lightbulb integrated with a gear and a document/scroll, rendered in gold on a deep navy background, suitable for use as the app header logo.",
+      "files": [
+        "frontend/src/components/layout/AppLayout.tsx",
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-13"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

@@ -1,0 +1,341 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Universal Invention-to-Patent App with AI Voice Integration",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create a visually distinctive app theme with a professional, futuristic aesthetic — deep navy/slate backgrounds, gold or amber accent colors, clean sans-serif typography, and a structured dashboard layout suited to an inventor/patent workflow",
+      "acceptanceCriteria": [
+        "All pages share a consistent color palette of deep navy/slate with gold or amber accents",
+        "Typography is clean, legible, and professional throughout",
+        "Dashboard layout is structured with clear navigation between major sections"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define CSS custom properties for the PatentForge AI theme: deep navy/slate background colors (--bg-primary, --bg-secondary), gold/amber accent colors (--accent-primary, --accent-secondary), professional typography variables, and consistent spacing/border-radius values. Apply theme colors to root, body, and key element selectors to ensure consistent application across all pages and components."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme with custom colors matching the PatentForge AI theme: navy/slate backgrounds ('navy-900', 'slate-800', etc.), gold/amber accents ('gold-500', 'amber-400', etc.), and professional sans-serif font family. Configure these colors to integrate with shadcn/ui components and ensure consistency across the application."
+        },
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a reusable AppLayout component that provides the structured dashboard layout with consistent navigation. Include a header section with the PatentForge AI logo (referencing frontend/public/assets/generated/patentforge-logo.dim_256x256.png), navigation links to Dashboard, Portfolio, and Resources pages, and a main content area with appropriate padding and background styling using the defined theme colors."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Build a main dashboard page that shows an overview of the user's invention portfolio — a list of invention projects with title, status, and creation date, with functionality to create new projects and open existing ones",
+      "acceptanceCriteria": [
+        "Dashboard displays all saved invention projects as cards or list items",
+        "Each item shows title, status badge, and creation date",
+        "A 'New Invention' button opens a project creation flow",
+        "Clicking an existing project navigates to its detail page"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "create",
+          "description": "Create the Dashboard page component that fetches all projects using the getAllProjects backend method. Display projects as cards in a responsive grid layout, showing project title, status badge (styled according to status: Draft, In Review, Ready to Submit, Submitted), and formatted creation date. Include a prominent 'New Invention' button that navigates to the project creation flow. Each project card should be clickable to navigate to the Invention Workspace page with the project ID. Use shadcn/ui Card components and apply the PatentForge AI theme colors."
+        },
+        {
+          "path": "frontend/src/pages/NewProject.tsx",
+          "operation": "create",
+          "description": "Create a NewProject page component with a form to capture the initial invention project details: title field (required), status selector (default to 'draft'), and optional initial problem/solution fields. On form submission, call the createProject backend method with InventionProjectInput data, then navigate to the newly created project's Invention Workspace page. Use shadcn/ui Form, Input, Select, and Button components with theme styling."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the Dashboard and NewProject pages into the application router. Add routes for '/dashboard' (Dashboard component) and '/new-project' (NewProject component). Set '/dashboard' as the default route. Wrap all routes with the AppLayout component to ensure consistent navigation and theme application."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Implement an Invention Idea Workspace page where users can write and edit the full description of their invention idea with auto-save functionality",
+      "acceptanceCriteria": [
+        "All specified fields are present and editable",
+        "Content is persisted to the backend actor",
+        "Auto-save triggers after user stops typing for 2 seconds",
+        "A save confirmation indicator is shown"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/InventionWorkspace.tsx",
+          "operation": "create",
+          "description": "Create the InventionWorkspace page component that loads an existing project using getProject backend method based on the project ID from URL params. Display editable fields for Invention Title, Problem Being Solved, Proposed Solution, Key Features, and Claims using shadcn/ui Textarea and Input components. Implement auto-save logic using useEffect with a 2-second debounce timer that calls updateProject backend method when user stops typing. Show a save status indicator (e.g., 'Saving...', 'Saved', 'Error') with appropriate styling. Apply theme colors and structured layout."
+        },
+        {
+          "path": "frontend/src/hooks/useAutoSave.ts",
+          "operation": "create",
+          "description": "Create a custom React hook useAutoSave that accepts data, a save callback function, and a debounce delay (default 2000ms). Implement debounced auto-save logic that triggers the save callback after the user stops editing for the specified delay. Return save status ('idle', 'saving', 'saved', 'error') and any error messages. This hook will be used by InventionWorkspace to persist changes to the backend."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add a route for '/workspace/:projectId' that renders the InventionWorkspace component. This route should be accessible from the Dashboard when clicking on an existing project card."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add hands-free voice input functionality using the browser's Web Speech API with microphone buttons next to major text inputs and visual indicators for active recognition",
+      "acceptanceCriteria": [
+        "A microphone icon button appears next to major text input fields",
+        "Clicking the mic button activates voice recognition via Web Speech API",
+        "Dictated text is inserted into the active field in real time",
+        "An animated indicator (e.g., pulsing ring) shows when voice input is active",
+        "Clicking the mic button again stops voice recognition"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useVoiceInput.ts",
+          "operation": "create",
+          "description": "Create a custom React hook useVoiceInput that wraps the Web Speech API (SpeechRecognition). Provide functions to start and stop voice recognition, track recognition state (inactive, listening, error), and return the transcribed text. Handle browser compatibility checks and error states (microphone permissions, API availability). Return isListening boolean, transcript text, startListening, stopListening functions, and any error messages."
+        },
+        {
+          "path": "frontend/src/components/ui/VoiceInputButton.tsx",
+          "operation": "create",
+          "description": "Create a VoiceInputButton component that accepts a callback to receive transcribed text. Use the useVoiceInput hook internally. Render a microphone icon button using shadcn/ui Button component. Toggle listening state on click. When active, display an animated pulsing ring indicator around the button using CSS animations with theme accent colors. When transcription is received, invoke the callback with the text and append it to the target field. Apply theme styling and ensure accessibility."
+        },
+        {
+          "path": "frontend/src/pages/InventionWorkspace.tsx",
+          "operation": "modify",
+          "description": "Integrate VoiceInputButton components next to each major text field (Problem, Solution, Features, Claims). Position buttons inline with the field labels or as suffix icons within the input containers. When voice input completes, append the transcribed text to the current field value and trigger the auto-save mechanism. Ensure buttons are visually consistent with the theme and do not interfere with field layout."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Implement a Scientific Terminology Assistant panel within the Invention Workspace with a searchable glossary of common scientific and engineering terms",
+      "acceptanceCriteria": [
+        "A terminology search panel is accessible from the Invention Workspace",
+        "Users can search for terms and see definitions",
+        "Definitions include recommended phrasing suitable for patent language",
+        "At least 30 common scientific and engineering terms are included in the initial glossary"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/data/scientificTerminology.ts",
+          "operation": "create",
+          "description": "Create a TypeScript file exporting an array of scientific terminology entries. Each entry should include: term (string), definition (string), patentPhrasing (string, recommended wording for patent use). Include at least 30 common scientific and engineering terms (e.g., 'mechanism', 'apparatus', 'embodiment', 'configuration', 'substrate', 'interface', 'algorithm', 'actuator', etc.). Organize as a typed constant array for easy searching and filtering."
+        },
+        {
+          "path": "frontend/src/components/workspace/ScientificTerminologyPanel.tsx",
+          "operation": "create",
+          "description": "Create a ScientificTerminologyPanel component that displays the scientific terminology glossary. Include a search input using shadcn/ui Input to filter terms by name. Display filtered results as a list of cards or accordion items using shadcn/ui components, showing term name, definition, and recommended patent phrasing. Allow users to click a term to see its full details in a tooltip or expanded section. Apply theme styling and ensure the panel integrates smoothly within the Invention Workspace layout."
+        },
+        {
+          "path": "frontend/src/pages/InventionWorkspace.tsx",
+          "operation": "modify",
+          "description": "Integrate the ScientificTerminologyPanel component into the InventionWorkspace layout, positioning it as a collapsible side panel or tabbed section accessible while editing invention fields. Include a toggle button or tab to show/hide the panel. Ensure the panel does not obscure the main editing area and maintains responsive behavior on smaller screens."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Implement a Legal Terminology Formatter section with standard patent legal phrases and claim structures that can be inserted into patent submission text",
+      "acceptanceCriteria": [
+        "A legal phrases panel is available in the Invention Workspace",
+        "Users can click a phrase to insert it into the claims text area",
+        "A formatted preview section shows the current claim text with proper legal structure",
+        "At least 20 standard patent legal phrases are included"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/data/legalPhrases.ts",
+          "operation": "create",
+          "description": "Create a TypeScript file exporting an array of legal terminology entries for patent claims. Each entry should include: phrase (string), description (string), category (e.g., 'claim-structure', 'transition', 'qualifier'). Include at least 20 standard patent legal phrases (e.g., 'wherein', 'comprising', 'consisting of', 'at least one', 'a plurality of', 'configured to', 'adapted for', 'in accordance with', 'independent claim', 'dependent claim', etc.). Organize as a typed constant array grouped by category."
+        },
+        {
+          "path": "frontend/src/components/workspace/LegalPhrasesPanel.tsx",
+          "operation": "create",
+          "description": "Create a LegalPhrasesPanel component that displays the legal phrases grouped by category. Render each phrase as a clickable button or chip using shadcn/ui Button or Badge components. When a phrase is clicked, invoke a callback that inserts the phrase into the Claims text field at the current cursor position or appends it to the end. Apply theme styling with accent colors for interactive elements."
+        },
+        {
+          "path": "frontend/src/components/workspace/ClaimsPreview.tsx",
+          "operation": "create",
+          "description": "Create a ClaimsPreview component that displays a formatted read-only preview of the Claims text field content. Apply basic formatting to highlight legal structures (e.g., numbering independent and dependent claims, indenting dependent claims, bolding transition phrases). Use a monospace or structured font for clarity. Style with theme colors and display in a bordered panel adjacent to the Claims editing area."
+        },
+        {
+          "path": "frontend/src/pages/InventionWorkspace.tsx",
+          "operation": "modify",
+          "description": "Integrate the LegalPhrasesPanel and ClaimsPreview components into the InventionWorkspace layout near the Claims text field. Position the LegalPhrasesPanel as a collapsible section or side panel with a toggle button. Display the ClaimsPreview below or beside the Claims textarea, updating in real time as the user types or inserts phrases. Ensure responsive layout and theme consistency."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Implement an AI Collaboration panel that provides automated analysis and suggestions for an invention idea, including a novelty checklist, suggested improvements, and a readiness score",
+      "acceptanceCriteria": [
+        "An 'Analyze Idea' button triggers the AI analysis workflow",
+        "A novelty checklist with at least 5 questions is displayed",
+        "Suggested improvements are shown as a bulleted list",
+        "A readiness score percentage is calculated and displayed",
+        "Analysis results are saved to the backend and reloaded when the project is reopened"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/aiAnalysis.ts",
+          "operation": "create",
+          "description": "Create a deterministic AI analysis utility function that accepts InventionProjectInput data and generates an AIAnalysis object. Implement rule-based logic to produce: a noveltyChecklist array (at least 5 questions based on field completeness and content keywords), a suggestions array (improvement recommendations based on missing or weak fields), and a readinessScore (0-100 percentage based on field completeness, claim structure quality, and presence of key patent terminology). Return a fully typed AIAnalysis object matching the backend interface."
+        },
+        {
+          "path": "frontend/src/components/workspace/AICollaborationPanel.tsx",
+          "operation": "create",
+          "description": "Create an AICollaborationPanel component that displays AI analysis results. Include an 'Analyze Idea' button that triggers the analysis using the aiAnalysis utility function and the current project data. Display the novelty checklist as a collapsible list of questions with checkboxes (non-interactive, informational). Display suggested improvements as a bulleted list. Display the readiness score as a large percentage with a progress bar or circular indicator using theme accent colors. Show loading state while analysis is running. Apply theme styling and integrate smoothly within the Invention Workspace layout."
+        },
+        {
+          "path": "frontend/src/pages/InventionWorkspace.tsx",
+          "operation": "modify",
+          "description": "Integrate the AICollaborationPanel component into the InventionWorkspace layout as a tabbed section or collapsible panel. When the user clicks 'Analyze Idea', run the analysis, update the project's aiAnalysis field, and call updateProject backend method to persist the results. When loading an existing project, display the saved aiAnalysis if present. Ensure the panel is easily accessible but does not clutter the main editing area."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Implement a Learning Resources section accessible from the main navigation with categorized patent guidance articles and resource links",
+      "acceptanceCriteria": [
+        "A Resources page is accessible from the main navigation",
+        "Resources are grouped into at least 4 categories",
+        "Each category expands to show individual resource entries",
+        "Each resource entry includes a title and a descriptive summary"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/data/learningResources.ts",
+          "operation": "create",
+          "description": "Create a TypeScript file exporting a structured array of learning resources. Organize resources into at least 4 categories: 'Patent Application Process', 'Types of Patents', 'Prior Art Search', 'Working with a Patent Attorney'. Each resource entry should include: title (string), summary (string), and optional externalUrl (string). Include at least 3 resources per category, totaling 12+ resources. Structure as a typed constant array with category grouping."
+        },
+        {
+          "path": "frontend/src/pages/Resources.tsx",
+          "operation": "create",
+          "description": "Create a Resources page component that displays learning resources grouped by category. Use shadcn/ui Accordion or Collapsible components to allow each category to expand and show individual resource entries. Each resource entry should display its title and summary, with optional external link if provided. Apply theme styling with accent colors for headers and interactive elements. Ensure the layout is clean and easy to navigate."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add a route for '/resources' that renders the Resources component. Ensure the Resources link is included in the AppLayout navigation menu for easy access from any page."
+        },
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Add a 'Resources' navigation link to the AppLayout header that navigates to '/resources'. Ensure the link is styled consistently with other navigation items and is visually distinct when the current route matches the Resources page."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Implement file import and export functionality for invention projects, allowing users to export and import project data as plain-text files",
+      "acceptanceCriteria": [
+        "An 'Export' button on each invention project generates and downloads a .txt file with all project fields",
+        "The exported file is clearly structured with labeled sections",
+        "An 'Import File' button on the New Invention flow allows uploading a previously exported file",
+        "Imported data correctly pre-populates the relevant form fields"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/projectExport.ts",
+          "operation": "create",
+          "description": "Create a utility function exportProjectAsText that accepts an InventionProject object and generates a formatted plain-text string with clearly labeled sections (Title, Problem, Solution, Features, Claims, Status, AI Analysis). Return the formatted text. Create a second function downloadTextFile that triggers a browser download of the text string as a .txt file with a filename based on the project title and current date."
+        },
+        {
+          "path": "frontend/src/utils/projectImport.ts",
+          "operation": "create",
+          "description": "Create a utility function parseImportedText that accepts a plain-text string (from an uploaded .txt file) and extracts project field values by parsing the labeled sections. Return a partial InventionProjectInput object with the extracted fields. Handle missing sections gracefully and validate that at least the title is present. This function will be used to pre-populate the NewProject form when a user imports a file."
+        },
+        {
+          "path": "frontend/src/pages/InventionWorkspace.tsx",
+          "operation": "modify",
+          "description": "Add an 'Export Project' button to the InventionWorkspace page that calls the exportProjectAsText and downloadTextFile functions to generate and download a .txt file of the current project. Position the button in the page header or action toolbar. Use shadcn/ui Button component with theme styling."
+        },
+        {
+          "path": "frontend/src/pages/NewProject.tsx",
+          "operation": "modify",
+          "description": "Add an 'Import File' button to the NewProject page that opens a file input dialog allowing the user to upload a .txt file. When a file is selected, read its contents, parse it using the parseImportedText function, and pre-populate the form fields with the extracted data. Display a confirmation message or error if parsing fails. Use shadcn/ui FileInput or native file input with custom styled button and theme colors."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Implement a Patent Lawyer Export package feature that generates a formatted text export with all project details and a custom cover note",
+      "acceptanceCriteria": [
+        "A 'Generate Lawyer Package' button is available on each invention project",
+        "The package includes all required sections: title, description, claims, AI analysis, cover note",
+        "User can write a custom cover note before generating",
+        "The package downloads as a clearly formatted .txt file"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/lawyerPackageExport.ts",
+          "operation": "create",
+          "description": "Create a utility function generateLawyerPackage that accepts an InventionProject object and a custom cover note string. Generate a formatted plain-text document that includes: a cover note section (user-provided text), invention title, problem description, solution description, key features, claims section (formatted with legal structure), and AI analysis summary (novelty checklist, suggestions, readiness score). Return the formatted text. Create a second function downloadLawyerPackage that triggers a browser download of the text as a .txt file with a filename like 'LawyerPackage-[ProjectTitle]-[Date].txt'."
+        },
+        {
+          "path": "frontend/src/components/workspace/LawyerPackageDialog.tsx",
+          "operation": "create",
+          "description": "Create a LawyerPackageDialog component using shadcn/ui Dialog component. Display a textarea for the user to enter a custom cover note. Include 'Generate Package' and 'Cancel' buttons. When 'Generate Package' is clicked, call the generateLawyerPackage and downloadLawyerPackage functions with the current project data and the entered cover note, then close the dialog. Apply theme styling."
+        },
+        {
+          "path": "frontend/src/pages/InventionWorkspace.tsx",
+          "operation": "modify",
+          "description": "Add a 'Generate Lawyer Package' button to the InventionWorkspace page that opens the LawyerPackageDialog. Position the button in the page header or action toolbar near the 'Export Project' button. Use shadcn/ui Button component with theme styling and an appropriate icon."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Implement a Portfolio view page that displays all invention projects organized by status with summary statistics",
+      "acceptanceCriteria": [
+        "A Portfolio page is accessible from the main navigation",
+        "Inventions are grouped by their status",
+        "Summary statistics (total count, per-status counts, most recently updated) appear at the top",
+        "Clicking any invention card navigates to that project's workspace"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Portfolio.tsx",
+          "operation": "create",
+          "description": "Create a Portfolio page component that fetches all projects using getAllProjects and the most recently updated project using getMostRecentlyUpdatedProject backend methods. Calculate and display summary statistics at the top: total project count, counts per status (Draft, In Review, Ready to Submit, Submitted), and the title and date of the most recently updated project. Group and display projects by status in separate collapsible sections or tabbed panels. Each project card should show title, creation date, and a link to navigate to its InventionWorkspace page. Use shadcn/ui Card, Tabs, or Accordion components with theme styling."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add a route for '/portfolio' that renders the Portfolio component. Ensure the Portfolio link is included in the AppLayout navigation menu."
+        },
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Add a 'Portfolio' navigation link to the AppLayout header that navigates to '/portfolio'. Ensure the link is styled consistently with other navigation items and is visually distinct when the current route matches the Portfolio page."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Add a logo image for PatentForge AI and a hero banner image, and wire them into the app",
+      "acceptanceCriteria": [
+        "The generated logo image is placed in frontend/public/assets/generated/",
+        "The logo appears in the app header/navigation bar",
+        "The image renders clearly at both small (header) and medium sizes"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Reference the generated logo image at frontend/public/assets/generated/patentforge-logo.dim_256x256.png in the AppLayout header. Display the logo as an img element with appropriate width/height for header sizing (e.g., 40-48px height). Ensure the logo is positioned at the left side of the navigation bar and is clickable to navigate to the Dashboard home page. Apply theme styling and ensure the logo renders clearly on both light and dark backgrounds."
+        },
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "Reference the generated hero banner image at frontend/public/assets/generated/patentforge-hero-banner.dim_1200x400.png and display it as a hero section at the top of the Dashboard page. Use the image as a background or inline img element with responsive sizing. Overlay the hero section with a welcome heading and a tagline for PatentForge AI. Ensure the hero integrates smoothly with the dashboard layout and applies theme styling."
+        }
+      ]
+    }
+  ]
+}

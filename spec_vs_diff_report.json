@@ -1,0 +1,79 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-03-02T06:20:50.842Z",
+  "summary": "The diff implements the vast majority of the requested requirements. All major features are present: backend Motoko actor with CRUD operations, dashboard, invention workspace, portfolio, resources, voice input, AI analysis, legal phrases panel, scientific terminology panel, lawyer package export, and consistent theming. A few items have gaps worth noting.",
+  "missing_requirements": [
+    {
+      "id": "REQ-9",
+      "requirement": "Import functionality: allow users to import a previously exported text file to pre-populate a new invention project's fields. An 'Import File' button on the New Invention flow.",
+      "reason": "The NewProject page content was not included in the visible diff files. No import file parsing utility or Import button implementation is visible in the truncated or omitted files.",
+      "evidence": [
+        "frontend/src/pages/NewProject.tsx"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "The generated logo image (patentforge-logo.dim_256x256.png) must be placed in frontend/public/assets/generated/.",
+      "reason": "The diff lists 34 added files but no image asset files appear among them. The AppLayout references the logo path but the actual image file is not present in the diff.",
+      "evidence": [
+        "frontend/src/components/layout/AppLayout.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "getMostRecentlyUpdatedProject backend function and corresponding frontend query hook useGetMostRecentProject",
+      "reason": "The build request only specifies five CRUD operations: createProject, updateProject, getProject, getAllProjects, and deleteProject. A getMostRecentlyUpdatedProject function was added to the backend actor beyond the spec.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    },
+    {
+      "description": "getProjectsByStatus backend function and corresponding frontend query hook useGetProjectsByStatus",
+      "reason": "The build request does not specify a getProjectsByStatus backend function. Only the five CRUD operations were requested. This extra query was added beyond the spec.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/VoiceInputButton.tsx",
+    "frontend/src/components/layout/AppLayout.tsx",
+    "frontend/src/components/workspace/AICollaborationPanel.tsx",
+    "frontend/src/components/workspace/ClaimsPreview.tsx",
+    "frontend/src/components/workspace/LawyerPackageDialog.tsx",
+    "frontend/src/components/workspace/LegalPhrasesPanel.tsx",
+    "frontend/src/components/workspace/ScientificTerminologyPanel.tsx",
+    "frontend/src/data/learningResources.ts",
+    "frontend/src/data/legalPhrases.ts",
+    "frontend/src/data/scientificTerminology.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useAutoSave.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useVoiceInput.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/Dashboard.tsx",
+    "frontend/src/pages/InventionWorkspace.tsx",
+    "frontend/src/pages/NewProject.tsx",
+    "frontend/src/pages/Portfolio.tsx",
+    "frontend/src/pages/Resources.tsx",
+    "frontend/src/utils/aiAnalysis.ts",
+    "frontend/src/utils/lawyerPackageExport.ts",
+    "frontend/src/utils/projectExport.ts",
+    "frontend/src/utils/projectImport.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

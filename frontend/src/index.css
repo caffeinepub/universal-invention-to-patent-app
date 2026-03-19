@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Deep Navy / Slate backgrounds */
+    --background: 0.14 0.025 255;
+    --foreground: 0.93 0.01 255;
+
+    --card: 0.18 0.03 255;
+    --card-foreground: 0.93 0.01 255;
+
+    --popover: 0.2 0.035 255;
+    --popover-foreground: 0.93 0.01 255;
+
+    /* Gold/Amber primary */
+    --primary: 0.78 0.16 75;
+    --primary-foreground: 0.12 0.02 255;
+
+    --secondary: 0.22 0.04 255;
+    --secondary-foreground: 0.85 0.01 255;
+
+    --muted: 0.22 0.03 255;
+    --muted-foreground: 0.58 0.04 255;
+
+    --accent: 0.78 0.16 75;
+    --accent-foreground: 0.12 0.02 255;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.28 0.04 255;
+    --input: 0.25 0.04 255;
+    --ring: 0.78 0.16 75;
+
+    --chart-1: 0.78 0.16 75;
+    --chart-2: 0.65 0.12 200;
+    --chart-3: 0.55 0.14 160;
+    --chart-4: 0.7 0.18 50;
+    --chart-5: 0.6 0.2 30;
+
+    --sidebar: 0.16 0.03 255;
+    --sidebar-foreground: 0.93 0.01 255;
+    --sidebar-primary: 0.78 0.16 75;
+    --sidebar-primary-foreground: 0.12 0.02 255;
+    --sidebar-accent: 0.22 0.04 255;
+    --sidebar-accent-foreground: 0.85 0.01 255;
+    --sidebar-border: 0.28 0.04 255;
+    --sidebar-ring: 0.78 0.16 75;
+
+    /* Gold accent custom */
+    --gold: 0.78 0.16 75;
+    --gold-bright: 0.85 0.18 80;
+    --navy-deep: 0.12 0.025 255;
+    --navy-mid: 0.18 0.03 255;
+    --navy-light: 0.24 0.04 255;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer utilities {
+  .gold-gradient {
+    background: linear-gradient(135deg, oklch(0.78 0.16 75), oklch(0.85 0.18 80));
+  }
+
+  .navy-gradient {
+    background: linear-gradient(135deg, oklch(0.12 0.025 255), oklch(0.18 0.03 255));
+  }
+
+  .text-gold {
+    color: oklch(0.78 0.16 75);
+  }
+
+  .text-gold-bright {
+    color: oklch(0.85 0.18 80);
+  }
+
+  .border-gold {
+    border-color: oklch(0.78 0.16 75);
+  }
+
+  .bg-navy-deep {
+    background-color: oklch(0.12 0.025 255);
+  }
+
+  .bg-navy-mid {
+    background-color: oklch(0.18 0.03 255);
+  }
+
+  .bg-navy-light {
+    background-color: oklch(0.24 0.04 255);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 20px oklch(0.78 0.16 75 / 0.3);
+  }
+
+  .pulse-ring {
+    animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 oklch(0.78 0.16 75 / 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px oklch(0.78 0.16 75 / 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 oklch(0.78 0.16 75 / 0);
+    }
+  }
+
+  @keyframes mic-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  .mic-active {
+    animation: mic-pulse 1s ease-in-out infinite;
+  }
+}
